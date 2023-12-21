@@ -15,53 +15,10 @@ public class CartPage extends BasePage {
     }
 
 
-    @FindBy(xpath = "//input[@class='o-header__search--input']")
-    public WebElement searchBox;
-
-    @FindBy(xpath = "//input[@id='o-searchSuggestion__input']")
-    public WebElement nextSearchBox;
-
-
-    @FindBy(xpath = "//*[@id=\"addBasket\"]")
-    public WebElement addCart;
-
-
-    @FindBy(xpath = "(//span[@class='o-header__userInfo--text'])[3]")
-    public WebElement goToCart;
-
-    @FindBy(xpath = "//ins[@id=\"priceNew\"]")
-    public WebElement pagePrice;
-
-    @FindBy(xpath = "//*[@id=\"sizes\"]/div/span[1]")
-    public WebElement sizeSmall;
-
-    @FindBy(xpath = "//span[@class='m-productPrice__salePrice']")
-    public WebElement productPrice;
-
-    @FindBy(xpath = "(//span[@class='o-productCard__content--desc'])[2]")
-    public WebElement oneProduct;
-
-    @FindBy(xpath = "//select[@id='quantitySelect0-key-0']")
-    public WebElement selectMenu;
-
-    @FindBy(xpath = "//button[@id='removeCartItemBtn0-key-0']")
-    public WebElement removeFromCart;
-
-    @FindBy(xpath = "//div[@class='m-productDescription__infoDesc']")
-    public WebElement productInfo;
-
-    @FindBy(xpath = "//select[@id='quantitySelect0-key-0']/option[@value = '2']")
-    public WebElement selectDropMenu;
-
-    @FindBy(xpath = "(//strong[@class='m-empty__messageTitle'])[1]")
-    public WebElement checkCartMessage;
-
-    @FindBy(xpath = "//button[@class='o-header__search--close -hasButton']")
-    public WebElement clearSearchBox;
-
-    @FindBy(xpath = "//div[@class='ng-tns-c57-11 toast-message ng-star-inserted']")
+    @FindBy(xpath = "//div[@id = 'toast-container']//div[@role = 'alertdialog']")
     public WebElement successfullyAddedMessage;
-
+@FindBy(xpath = "//span[.='Sepetim']")
+public WebElement myCart;
     @FindBy(xpath = "//button[@class='btn btn-secondary btn-sm w-100 pl-0 ml-0']")
     public WebElement goToBasketButton;
     @FindBy(xpath = "//button[@class='btn btn-warning btn-sm w-100 pl-0 ml-0']")
@@ -73,25 +30,36 @@ public class CartPage extends BasePage {
     @FindBy(xpath = "//div[@class='addressList']//span[@class='mat-radio-outer-circle']")
     public WebElement selectAddress;
 
-    @FindBy(xpath = "//a[@class='nav-link active']")
+    @FindBy(xpath = "//a[@class='nav-link']")
     public WebElement paymentInformation;
 
-    @FindBy(xpath = "//a[.=' Use Saved Cards']")
+    @FindBy(xpath = "//div[@class='col-lg-6 ng-star-inserted']/a")
     public WebElement useSavedCards;
     @FindBy(xpath = "(//div[@class='col-lg-6 border-right ng-star-inserted']//user-cart)[1]")
     public WebElement firstCart;
     @FindBy(xpath = "//table//tr//span[@class='mat-radio-inner-circle']")
     public List<WebElement> allOptionsForInstallment;
     @FindBy(xpath = "(//table//tr//span[@class='mat-radio-inner-circle'])[1]")
-    public List<WebElement> firstOptionForInstallment;
+    public WebElement firstOptionForInstallment;
 
-    @FindBy(xpath = "//mat-checkbox[@id = 'mat-checkbox-1']")
+    @FindBy(xpath = "//input[@id = 'mat-checkbox-1-input']")
     public WebElement termsAndConditions;
     @FindBy(xpath = "//button[@class = 'btn btn-sm btn-warning w-100 checkBasket']")
     public WebElement makeThePayment;
+    @FindBy(xpath = "//iframe[@id='iframe']")
+    public WebElement iframe;
     @FindBy(xpath = "//input[@id='smsCode']")
     public WebElement smsCode;
     @FindBy(xpath = "//button[@id='submitBtn']")
     public WebElement submitButton;
+
+    @FindBy(xpath = "//main[@class='ng-star-inserted']//span")
+    public WebElement paymentSuccessMessage;
+
+    @FindBy(xpath = "(//main[@class='ng-star-inserted']//button)[1]")
+    public WebElement continueShoppingButton;
+
+    @FindBy(xpath = "(//main[@class='ng-star-inserted']//button)[2]")
+    public WebElement goToMyOrdersButton;
 
 }

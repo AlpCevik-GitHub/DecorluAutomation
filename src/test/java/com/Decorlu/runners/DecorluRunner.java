@@ -16,9 +16,9 @@ import org.junit.runner.RunWith;
         },
         features = "src/test/resources/features",
         glue = "com/Decorlu/step_definitions",
-        dryRun = true,
+        dryRun = false,
         stepNotifications = true,
-        tags = "@snip",
+        tags = "@123",
         publish=true
 )
 

@@ -6,6 +6,7 @@ import com.Decorlu.utilities.Driver;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -14,9 +15,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LoginPage extends BasePage {
 
+    WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
+    JavascriptExecutor executor = (JavascriptExecutor) Driver.getDriver();
+
     public LoginPage() {
         PageFactory.initElements(Driver.getDriver(), this);
     }
+
 
     @FindBy(xpath = " //a[.='Giriş Yap / Kayıt Ol']")
     public WebElement girisYapKayitOlButton;
@@ -86,19 +91,21 @@ public class LoginPage extends BasePage {
 
 
     public void login() {
-        Driver.getDriver().get(ConfigurationReader.getProperty("url"));
 
-        girisYapKayitOlButton.click();
 
-        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
-        wait.until(ExpectedConditions.elementToBeClickable(girisYapButton)).click();
+
+        wait.until(ExpectedConditions.elementToBeClickable(girisYapKayitOlButton));
+        executor.executeScript("arguments[0].click();",girisYapKayitOlButton);
+        BrowserUtils.sleep(5);
+        wait.until(ExpectedConditions.elementToBeClickable(girisYapButton));
+        executor.executeScript("arguments[0].click();",girisYapButton);
 
 
         emailBox.sendKeys(ConfigurationReader.getProperty("username"));
 
         passwordBox.sendKeys(ConfigurationReader.getProperty("password"));
 
-        loginButton.click();
+        executor.executeScript("arguments[0].click();",loginButton);
 
     }
 

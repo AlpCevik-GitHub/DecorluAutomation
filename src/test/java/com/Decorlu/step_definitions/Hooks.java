@@ -1,6 +1,7 @@
 package com.Decorlu.step_definitions;
 
 
+import com.Decorlu.utilities.BrowserUtils;
 import com.Decorlu.utilities.ConfigurationReader;
 import com.Decorlu.utilities.Driver;
 import io.cucumber.java.After;
@@ -18,6 +19,7 @@ public class Hooks {
     @Before
     public void setup() {
         Driver.getDriver().get(ConfigurationReader.getProperty("url"));
+        BrowserUtils.sleep(5);
     }
 
 
@@ -58,7 +60,7 @@ public class Hooks {
 
 
 
-        //Driver.closeDriver();
+        Driver.closeDriver();
 
 //        System.out.println("===Closing browser using cucumber @After");
 //        System.out.println("===Scenario ended/Take screenshot if failed!");
