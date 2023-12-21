@@ -2,8 +2,51 @@ Feature: User can buy any item from the store
 
   Background: User is logged in
     Given I am logged in as a user
-
+@snip
     Scenario: User buys an item
-      Given I am on the store page
-      When I click on the "Buy" button
-      Then I should see "Thank you for your purchase"
+      Given User select "Mobilya" category
+      When User select "Bahçe Mobilyaları" subcategory
+      And User select Marka
+      And User select Fiyat Aralığı
+      And User select first product on the search result
+      And User add the product to the cart
+      And User go to the cart
+      Then Verify the product is added to the cart
+      Then Verify the product price is correct
+      Then Verify the product quantity is correct
+      Then Verify the product total price is correct
+      And User increase the quantity of the product
+      Then Verify the product quantity is increased
+      And User delete the product from the cart
+      Then Verify the product is deleted from the cart
+      And User confirm the cart
+      And User select delivery address
+      And User select terms of conditions
+      And User select payment method
+      And User select first payment option
+      Then Verify that total amount equals order summary amount
+      And User click make the payment button
+      And User enter sms code "283126" and click submit button
+      Then Verify that order is completed successfully
+      And User click Return to my orders button
+      Then Verify that order is listed in my orders page
+
+Scenario: User controls order completion
+    Given User is logged in
+    When User click my orders button
+    Then Verify that order is listed in my orders page
+    And User click the order
+    Then Verify that order details are correct
+    And User click the return button
+    Then Verify that return page is opened
+    And User click the return reason
+
+  Scenario: User controls my orders
+
+    When User click my orders button
+    And User click "Ongoing Orders" button
+    Then Verify that order is listed in my orders page
+    And User click the order
+    Then Verify that order details are correct
+
+

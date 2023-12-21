@@ -3,6 +3,9 @@ package com.Decorlu.pages;
 import com.Decorlu.utilities.BrowserUtils;
 import com.Decorlu.utilities.ConfigurationReader;
 import com.Decorlu.utilities.Driver;
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -99,5 +102,22 @@ public class LoginPage extends BasePage {
 
     }
 
+    public void verifyAccountOnEmail() {
+
+
+        Response response = RestAssured.given().accept(ContentType.JSON)
+                .when().get("https://api.testmail.app/api/json?apikey=f3926131-7ce4-4e67-9cd8-b4521f5921b9&namespace=sjtbl&pretty=true").then()
+                .extract().response();
+
+        String path = response.path("emails[0].text");
+        System.out.println(path);
+
+        //int firstIndex = path.indexOf("Password\n[");
+        //int lastIndex = path.lastIndexOf("]\n \n\n\n----");
+        //String verificationCode = path.substring(firstIndex+"Password\n[".length(), lastIndex);
+        //Driver.getDriver().get(verificationCode);
+        //System.out.println(verificationCode);
+
+    }
 
 }

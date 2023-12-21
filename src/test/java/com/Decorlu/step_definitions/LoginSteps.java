@@ -9,6 +9,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -24,9 +25,9 @@ public class LoginSteps {
     @When("Go to login page")
     public void go_to_login_page() {
 
-        Driver.getDriver().get(ConfigurationReader.getProperty("url"));
+        //Driver.getDriver().get(ConfigurationReader.getProperty("url"));
         loginPage.girisYapKayitOlButton.click();
-        BrowserUtils.sleep(3);
+
         //WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
         //wait.until(ExpectedConditions.invisibilityOf((loginPage.girisYapButton)));
         loginPage.girisYapButton.click();
@@ -36,21 +37,21 @@ public class LoginSteps {
     @When("Enter valid username in username field")
     public void enter_valid_username_in_username_field() {
         loginPage.emailBox.sendKeys(ConfigurationReader.getProperty("username"));
-        BrowserUtils.sleep(3);
+
 
     }
     @When("Enter valid password in password field")
     public void enter_valid_password_in_password_field() {
 
         loginPage.passwordBox.sendKeys(ConfigurationReader.getProperty("password"));
-        BrowserUtils.sleep(3);
+
 
     }
     @When("Click on the login button")
     public void click_on_the_login_button() {
 
         loginPage.loginButton.click();
-        BrowserUtils.sleep(3);
+
     }
     @Then("Verify that user can login")
     public void verify_that_user_can_login() {
@@ -64,14 +65,14 @@ public class LoginSteps {
 
         loginPage.emailBox.sendKeys(credentials.get("username"));
         loginPage.passwordBox.sendKeys(credentials.get("password"));
-        BrowserUtils.sleep(3);
+
 
     }
     @When("hit enter key word")
     public void hit_enter_key_word() {
 
         loginPage.passwordBox.sendKeys(Keys.ENTER);
-        BrowserUtils.sleep(3);
+
     }
 
     @When("Enter referred credentials {string} {string}")
@@ -80,7 +81,7 @@ public class LoginSteps {
         loginPage.emailBox.sendKeys(string);
 
         loginPage.passwordBox.sendKeys(string2);
-        BrowserUtils.sleep(5);
+
         loginPage.loginButton.click();
 
     }
@@ -99,7 +100,7 @@ public class LoginSteps {
 //            loginPage.emailBox.sendKeys("a");
 //            loginPage.emailBox.clear();
 //        }
-        BrowserUtils.sleep(2);
+
         loginPage.passwordBox.clear();
         loginPage.passwordBox.sendKeys(string2);
         loginPage.passwordBox.sendKeys(Keys.BACK_SPACE);
@@ -137,7 +138,7 @@ public class LoginSteps {
     public void User_should_not_be_login_and_see_the_pop_up_message(String string) {
 
         loginPage.loginButton.click();
-        BrowserUtils.sleep(2);
+
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
         String actual = wait.until(ExpectedConditions.visibilityOf(loginPage.loginFailMessage2)).getText();
 
@@ -189,16 +190,26 @@ public class LoginSteps {
     @When("Select the checkbox of Terms of Use")
     public void select_the_checkbox_of_terms_of_use() {
         loginPage.termsAndConditions1.click();
-        BrowserUtils.sleep(2);
-        loginPage.termsAndConditions2.click();
-        BrowserUtils.sleep(2);
-        loginPage.termsAndConditions3.click();
-        BrowserUtils.sleep(2);
+        JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
+        //JavaScripts method to use : arguments[0].scrollIntoView(true)
+
+        js.executeScript("arguments[0].scrollIntoView(true);" + "arguments[0].click()", loginPage.termsAndConditions2);
+
+        js.executeScript("arguments[0].scrollIntoView(true);" + "arguments[0].click()", loginPage.termsAndConditions3);
+
+
     }
     @Then("Verify that user can create an account")
     public void verify_that_user_can_create_an_account() {
-        loginPage.createAccountButton.click();
-        BrowserUtils.sleep(2);
+
+        JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
+        //JavaScripts method to use : arguments[0].scrollIntoView(true)
+
+        js.executeScript("arguments[0].scrollIntoView(true);" + "arguments[0].click()", loginPage.createAccountButton);
+
+        loginPage.verifyAccountOnEmail();
+
+
     }
 
 
