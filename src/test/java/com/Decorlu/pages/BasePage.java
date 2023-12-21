@@ -19,8 +19,10 @@ public abstract class BasePage {
     public WebElement homeLife;
     @FindBy(xpath = "//div[@id='navbar']//ul//following-sibling::li[6]")
     public WebElement decoration;
-    @FindBy(xpath = "//div[@id='navbar']//ul//following-sibling::li[7]")
+    @FindBy(xpath = "//a[.='MOBİLYA']")
     public WebElement furniture;
+    @FindBy(xpath = "//*[@id=\"navbar\"]/user-navbar-link/nav/div/section/div/div[3]/a[1]")
+    public WebElement gardirop;
     @FindBy(xpath = "//div[@id='navbar']//ul//following-sibling::li[8]")
     public WebElement curpet;
     @FindBy(xpath = "//div[@id='navbar']//ul//following-sibling::li[9]")
@@ -36,19 +38,19 @@ public abstract class BasePage {
     @FindBy(xpath = "//div[@class='categoryleft']//li")
     public List<WebElement> relatedCategoriesAllProducts;
     @FindBy(xpath = "(//div[@class='categoryleft']//li)[1]")
-    public List<WebElement> firstProduct;
+    public WebElement firstProduct;
     @FindBy(xpath = "//mat-expansion-panel-header[@id='mat-expansion-panel-header-6']/..//div//input[@type='checkbox']")
     public WebElement allBrands;
-    @FindBy(xpath = "(//mat-expansion-panel-header[@id='mat-expansion-panel-header-6']/..//div//input[@type='checkbox'])[1]")
+    @FindBy(xpath = "//input[@id='var_e160f3aa-a15c-4fb0-af0c-681eaf31604a']")
     public WebElement firstBrand;
     @FindBy(xpath = "//mat-expansion-panel-header[@id='mat-expansion-panel-header-7']/..//div//input[@type='radio']")
     public List<WebElement> allPrices;
 
-    @FindBy(xpath = "(//mat-expansion-panel-header[@id='mat-expansion-panel-header-7']/..//div//input[@type='radio'])[1]")
+    @FindBy(xpath = "//input[@id='price_501']")
     public WebElement firstPrice;
     @FindBy(xpath = "//div[@class='productCategory']//div[@class='col-6 col-sm-6 col-md-4 col-lg-4 col-xl-3 mb-1 productListStyle ng-star-inserted']")
     public List<WebElement> allProductsInCategory;
-    @FindBy(xpath = "(//div[@class='productCategory']//div[@class='col-6 col-sm-6 col-md-4 col-lg-4 col-xl-3 mb-1 productListStyle ng-star-inserted'])[1]")
+    @FindBy(xpath = "(//div[@class='productCategory']//div[@class='col-6 col-sm-6 col-md-4 col-lg-4 col-xl-3 mb-1 productListStyle ng-star-inserted'])[1]//a")
     public WebElement firstProductInCategory;
     @FindBy(xpath = "//button[@class='btn packet']")
     public WebElement addToCartButton;
