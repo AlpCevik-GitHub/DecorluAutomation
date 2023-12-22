@@ -15,7 +15,10 @@ public class CartPage extends BasePage {
     }
 
 
-    @FindBy(xpath = "//div[@id = 'toast-container']//div[@role = 'alertdialog']")
+    @FindBy(xpath = "//div[contains(@class,'ngx-toastr toast-success')]//button")
+    public WebElement successfullyAddedMessageCloseButton;
+
+    @FindBy(xpath = "//div[contains(@class,'ngx-toastr toast-success')]//div")
     public WebElement successfullyAddedMessage;
 @FindBy(xpath = "//span[.='Sepetim']")
 public WebElement myCart;
@@ -27,14 +30,19 @@ public WebElement myCart;
     @FindBy(xpath = "//button[@class='btn btn-sm btn-warning w-100 checkBasket']")
     public WebElement confirmCartButton;
 
+    @FindBy(xpath = "//h5[.='Adres Bilgileri']")
+    public WebElement addressInformation;
     @FindBy(xpath = "//div[@class='addressList']//span[@class='mat-radio-outer-circle']")
     public WebElement selectAddress;
 
-    @FindBy(xpath = "//a[@class='nav-link']")
+    @FindBy(xpath = "//a[@class='nav-link']//h5[.='Ödeme Bilgileri']")
     public WebElement paymentInformation;
 
-    @FindBy(xpath = "//div[@class='col-lg-6 ng-star-inserted']/a")
+    @FindBy(xpath = "//div[@class='col-lg-6 border-right ng-star-inserted']//a")
     public WebElement useSavedCards;
+
+    @FindBy(xpath = "//div[@class='col-lg-6 border-right ng-star-inserted']")
+    public WebElement allCarts;
     @FindBy(xpath = "(//div[@class='col-lg-6 border-right ng-star-inserted']//user-cart)[1]")
     public WebElement firstCart;
     @FindBy(xpath = "//table//tr//span[@class='mat-radio-inner-circle']")
