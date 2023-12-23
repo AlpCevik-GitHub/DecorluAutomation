@@ -8,12 +8,13 @@ import com.github.javafaker.Faker;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.Map;
 
 public class LoginSteps {
@@ -22,16 +23,16 @@ public class LoginSteps {
     LoginPage loginPage = new LoginPage();
     Faker faker = new Faker();
 
+    WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
+    JavascriptExecutor executor = (JavascriptExecutor) Driver.getDriver();
+
     @When("Go to login page")
     public void go_to_login_page() {
-
-        //Driver.getDriver().get(ConfigurationReader.getProperty("url"));
-        loginPage.girisYapKayitOlButton.click();
-
-        //WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
-        //wait.until(ExpectedConditions.invisibilityOf((loginPage.girisYapButton)));
-        loginPage.girisYapButton.click();
-
+        wait.until(ExpectedConditions.elementToBeClickable(loginPage.girisYapKayitOlButton));
+        executor.executeScript("arguments[0].click();",loginPage.girisYapKayitOlButton);
+        BrowserUtils.sleep(5);
+        wait.until(ExpectedConditions.elementToBeClickable(loginPage.girisYapButton));
+        executor.executeScript("arguments[0].click();",loginPage.girisYapButton);
 
     }
     @When("Enter valid username in username field")
@@ -50,13 +51,21 @@ public class LoginSteps {
     @When("Click on the login button")
     public void click_on_the_login_button() {
 
-        loginPage.loginButton.click();
+        wait.until(ExpectedConditions.elementToBeClickable(loginPage.loginButton));
+
+
+        executor.executeScript("arguments[0].click();",loginPage.loginButton);
 
     }
     @Then("Verify that user can login")
     public void verify_that_user_can_login() {
 
-        Assert.assertTrue(loginPage.loginSuccessMessage.isDisplayed());
+        wait.until(ExpectedConditions.elementToBeClickable(loginPage.loginSuccessMessageCloseButton));
+
+        Assert.assertTrue(loginPage.loginSuccessMessage.getText().contains("Başarılı bir şekilde giriş yaptınız."));
+        System.out.println(loginPage.loginSuccessMessage.getText());
+        executor.executeScript("arguments[0].click();", loginPage.loginSuccessMessageCloseButton);
+        //loginPage.closePopUpLogin.click();
     }
 
 
@@ -88,8 +97,12 @@ public class LoginSteps {
     @Then("user should not be login and  see the message {string}")
     public void user_should_not_be_login_and_see_the_message(String string) {
 
-        Assert.assertTrue(loginPage.loginFailMessage.isDisplayed());
-        Assert.assertEquals(string,loginPage.loginFailMessage.getText());
+        wait.until(ExpectedConditions.elementToBeClickable(loginPage.loginFailMessageCloseButton));
+
+        Assert.assertTrue(loginPage.loginFailMessage.getText().contains(string));
+        System.out.println(loginPage.loginFailMessage.getText());
+        executor.executeScript("arguments[0].click();", loginPage.loginFailMessageCloseButton);
+
 
     }
     @When("User enter credentials {string} {string}")

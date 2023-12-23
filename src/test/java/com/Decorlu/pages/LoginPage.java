@@ -6,12 +6,19 @@ import com.Decorlu.utilities.Driver;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import org.junit.Assert;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class LoginPage extends BasePage {
 
@@ -44,10 +51,16 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = " //a[.='Şifrenizi mi unuttunuz?']")
     public WebElement forgotPasswordButton;
 
-    @FindBy(xpath = " //div[.=' Başarılı bir şekilde giriş yaptınız. ']")
+    @FindBy(xpath = "//div[contains(@class,'ngx-toastr toast-success')]/button")
+    public WebElement loginSuccessMessageCloseButton;
+
+    @FindBy(xpath = "//div[contains(@class,'ngx-toastr toast-success')]/div")
     public WebElement loginSuccessMessage;
 
-    @FindBy(xpath = " //div[.=' Kullanıcı adınız veya şifreniz yanlış. ']")
+    @FindBy(xpath = "//div[contains(@class,'ngx-toastr toast-warning')]/button")
+    public WebElement loginFailMessageCloseButton;
+
+    @FindBy(xpath = "//div[contains(@class,'ngx-toastr toast-warning')]/div")
     public WebElement loginFailMessage;
 
     @FindBy(xpath = "//div[.=' Formu göndermeden önce sistemdeki eksik alanları doldurunuz. ']")
@@ -105,7 +118,16 @@ public class LoginPage extends BasePage {
 
         passwordBox.sendKeys(ConfigurationReader.getProperty("password"));
 
+
+        wait.until(ExpectedConditions.elementToBeClickable(loginButton));
+
+
         executor.executeScript("arguments[0].click();",loginButton);
+        wait.until(ExpectedConditions.elementToBeClickable(loginSuccessMessageCloseButton));
+
+        Assert.assertTrue(loginSuccessMessage.getText().contains("Başarılı bir şekilde giriş yaptınız."));
+        System.out.println(loginSuccessMessage.getText());
+        executor.executeScript("arguments[0].click();", loginSuccessMessageCloseButton);
 
     }
 

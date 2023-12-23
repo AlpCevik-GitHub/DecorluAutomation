@@ -57,7 +57,7 @@ public class Driver {
                 case "chrome":
                     ChromeOptions options = new ChromeOptions();
                     options.addArguments("--disable-notifications");
-                    options.addArguments("--incognito");
+                    //options.addArguments("--incognito");
                     Map<String, Object> prefs = new HashMap<>();
                     prefs.put("intl.accept_languages", "en-GB");
                     //prefs.put("profile.managed_default_content_settings.images", 2);

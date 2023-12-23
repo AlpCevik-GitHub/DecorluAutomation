@@ -52,9 +52,14 @@ public abstract class BasePage {
     public List<WebElement> allProductsInCategory;
     @FindBy(xpath = "(//div[@class='productCategory']//div[@class='col-6 col-sm-6 col-md-4 col-lg-4 col-xl-3 mb-1 productListStyle ng-star-inserted'])[1]//a")
     public WebElement firstProductInCategory;
-    @FindBy(xpath = "//button[@class='btn packet']")
+    @FindBy(xpath = "//button[@class='btn packet']/span[.=' Sepete Ekle ']")
     public WebElement addToCartButton;
 
+    @FindBy(xpath = "//div[@aria-label='Sepete başarılı bir şekilde eklediniz.']")
+    public WebElement successfullyAddedMessage;
+
+    @FindBy(xpath = "//div[contains(@class,'ng-trigger-fadeIn ng-star-inserted')]")
+    public WebElement loadingMessage;
 
 
 

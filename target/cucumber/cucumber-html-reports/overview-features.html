@@ -50,9 +50,9 @@ $(document).ready(function() {
     var chartData = {
         datasets: [{
             data: [
-                19,
-                1,
-                7,
+                13,
+                0,
+                0,
                 0,
                 0
             ],
@@ -93,7 +93,7 @@ $(document).ready(function() {
                         var allData = data.datasets[tooltipItem.datasetIndex].data;
                         var tooltipLabel = data.labels[tooltipItem.index];
                         var tooltipData = allData[tooltipItem.index];
-                        var tooltipPercentage = Math.round(10000 * tooltipData / 27) / 100;
+                        var tooltipPercentage = Math.round(10000 * tooltipData / 13) / 100;
                         return tooltipLabel + ": " + tooltipData + " (" + tooltipPercentage + "%)";
                     }
                 }
@@ -106,8 +106,8 @@ $(document).ready(function() {
     var chartData = {
         datasets: [{
             data: [
-                0,
-                1
+                1,
+                0
             ],
             backgroundColor: [
                 "#00B000",
@@ -153,8 +153,8 @@ $(document).ready(function() {
     var chartData = {
         datasets: [{
             data: [
-                   0,
-                   1
+                   1,
+                   0
                ],
                backgroundColor: [
                 "#00B000",
@@ -228,7 +228,7 @@ $(document).ready(function() {
   <tbody>
     <tr class="info">
       <td>No Name (add projectName to cucumber-reporting.properties)</td>
-      <td>21 Dec 2023, 21:04</td>
+      <td>22 Dec 2023, 14:39</td>
     </tr>
   </tbody>
 </table>
@@ -325,52 +325,52 @@ $(document).ready(function() {
       <tr>
         <td class="tagname"><a href="report-feature_2483735163.html">User can buy any item from the store</a></td>
 
-        <td      class="passed"    >19</td>
-        <td      class="failed"    >1</td>
-        <td     class="skipped"   >7</td>
+        <td      class="passed"    >13</td>
         <td >0</td>
         <td >0</td>
-        <td class="total">27</td>
+        <td >0</td>
+        <td >0</td>
+        <td class="total">13</td>
 
+        <td  class="passed"    >1</td>
         <td >0</td>
-        <td  class="failed"    >1</td>
         <td class="total">1</td>
 
-        <td class="duration" data-value="50304689000">50.304</td>
-        <td class="failed">Failed</td>
+        <td class="duration" data-value="29534940000">29.534</td>
+        <td class="passed">Passed</td>
       </tr>
   </tbody>
 
   <tfoot class="total">
     <tr>
       <td></td>
-      <td>19</td>
-      <td>1</td>
-      <td>7</td>
+      <td>13</td>
       <td>0</td>
       <td>0</td>
-      <td>27</td>
+      <td>0</td>
+      <td>0</td>
+      <td>13</td>
 
+      <td>1</td>
       <td>0</td>
       <td>1</td>
-      <td>1</td>
 
-      <td class="duration">50.304</td>
+      <td class="duration">29.534</td>
       <td>1</td>
     </tr>
     <tr>
       <td></td>
-      <td>70.37%</td>
-      <td>3.70%</td>
-      <td>25.93%</td>
-      <td>0.00%</td>
-      <td>0.00%</td>
-      <td></td>
-      <td>0.00%</td>
       <td>100.00%</td>
-      <td></td>
-      <td></td>
       <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td>0.00%</td>
+      <td></td>
+      <td>100.00%</td>
+      <td>0.00%</td>
+      <td></td>
+      <td></td>
+      <td>100.00%</td>
     </tr>
   </tfoot>
 </table>

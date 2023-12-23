@@ -22,7 +22,7 @@ Feature: Login Functionality
     And hit enter key word
     Then Verify that user can login
 
-@wip
+@wip1
   Scenario Outline: user can not login with invalid credentials
     When Go to login page
     And Enter referred credentials "<username>" "<password>"
@@ -80,7 +80,7 @@ Feature: Login Functionality
       | in_username | E-Posta |
       | in_password | Şifrenizi girin |
 
-    @123
+    @wip
   Scenario: User can create an account with valid credentials
     When Go to login page
     And Click on the create an account button
@@ -92,7 +92,6 @@ Feature: Login Functionality
     And Enter valid password in parola tekrar field
     And Select the checkbox of Gender
     And Select the checkbox of Terms of Use
-    And Click on the create an account button
     Then Verify that user can create an account
 
 

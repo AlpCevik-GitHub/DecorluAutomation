@@ -7,6 +7,7 @@ import com.Decorlu.utilities.Driver;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
+import org.junit.AfterClass;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
@@ -38,10 +39,11 @@ public class Hooks {
 
     }
 
-    //@Before(value = "@db",order = 0)
+    @After(value = "@12345")
     public void setupForDatabaseScenarios() {
 
-        System.out.println("===this will only apply to scenarios with @db tag");
+        //System.out.println("===this will only apply to scenarios with @db tag");
+        Driver.closeDriver();
 
     }
 
@@ -60,7 +62,7 @@ public class Hooks {
 
 
 
-        Driver.closeDriver();
+        //Driver.closeDriver();
 
 //        System.out.println("===Closing browser using cucumber @After");
 //        System.out.println("===Scenario ended/Take screenshot if failed!");

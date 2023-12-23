@@ -1,25 +1,40 @@
 Feature: User can buy any item from the store
 
   Background: User is logged in
-    Given I am logged in as a user
 
-  @123
+
+  @1234
   Scenario: User buys an item
+    Given I am logged in as a user
     Given User select "Mobilya" category
     When User select "Bahçe Mobilyaları" subcategory
     And User select Marka
     And User select Fiyat Aralığı
     And User select first product on the search result
     And User add the product to the cart
+
+  @1234
+  Scenario: User go to the cart and verify the product
     And User go to the cart
     Then Verify the product is added to the cart
     Then Verify the product price is correct
     Then Verify the product quantity is correct
     Then Verify the product total price is correct
+  @1234
+  Scenario: User go to the cart and increase/decrease the quantity of the product
+    When User go to the cart
     And User increase the quantity of the product
+    And User decrease the quantity of the product
     Then Verify the product quantity is increased
+  @1234
+  Scenario: User go to the cart and delete the product
+    When User go to the cart
     And User delete the product from the cart
     Then Verify the product is deleted from the cart
+  @1234 @12345
+  Scenario: User go to the cart and complete the order
+    Given I am logged in as a user
+    When User go to the cart
     And User confirm the cart
     And User select delivery address
     And User select payment method

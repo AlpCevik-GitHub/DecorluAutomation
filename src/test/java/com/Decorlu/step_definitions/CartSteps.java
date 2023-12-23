@@ -8,25 +8,36 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.*;
 
 import javax.swing.*;
+import java.time.Duration;
 
 public class CartSteps {
 
     CartPage cartPage = new CartPage();
     LoginPage loginPage = new LoginPage();
 
-    WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 20);
+    WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 30);
     JavascriptExecutor executor = (JavascriptExecutor)Driver.getDriver();
+    Wait<WebDriver> waitFluent = new FluentWait<>(Driver.getDriver())
+            .withTimeout(Duration.ofSeconds(30))
+            .pollingEvery(Duration.ofSeconds(1))
+            .ignoring(Exception.class);
+
+    // JavaScript executor ile document.readyState'yi kontrol et
+
 
     @Given("I am logged in as a user")
     public void i_am_logged_in_as_a_user() {
         loginPage.login();
+        waitFluent.until((ExpectedCondition<Boolean>) webDriver ->
+                executor.executeScript("return document.readyState").equals("complete"));
+        wait.until(ExpectedConditions.visibilityOf(cartPage.myCart));
+        BrowserUtils.sleep(5);
     }
 
 
@@ -62,20 +73,35 @@ public class CartSteps {
     }
     @When("User add the product to the cart")
     public void user_add_the_product_to_the_cart() {
+        //BrowserUtils.sleep(5);
+        executor.executeScript("var loadingSpinner = document.querySelector('.ngx-spinner-overlay');" +
+                "if (loadingSpinner) { loadingSpinner.style.display = 'none'; }");
+        wait.until(ExpectedConditions.elementToBeClickable(cartPage.addToCartButton));
         executor.executeScript("arguments[0].click();", cartPage.addToCartButton);
+        wait.until(ExpectedConditions.elementToBeClickable(cartPage.successfullyAddedMessageCloseButton));
+        Assert.assertTrue(cartPage.successfullyAddedMessage.getText().contains("Sepete başarılı bir şekilde eklediniz."));
+        System.out.println(cartPage.successfullyAddedMessage.getText());
+        executor.executeScript("arguments[0].click();", cartPage.successfullyAddedMessageCloseButton);
+
+
     }
     @When("User go to the cart")
     public void user_go_to_the_cart() {
         Actions actions = new Actions(Driver.getDriver());
+        wait.until(ExpectedConditions.elementToBeClickable(cartPage.myCart));
         actions.clickAndHold(cartPage.myCart).perform();
+        actions.moveToElement(cartPage.goToBasketButton).click().perform();
+        BrowserUtils.sleep(2);
+       WebElement element = Driver.getDriver().findElement(By.xpath(("/html/body")));
+        element.click();
 
 
-        executor.executeScript("arguments[0].click();", cartPage.goToBasketButton);
+       // executor.executeScript("arguments[0].click();", cartPage.goToBasketButton);
 
     }
     @Then("Verify the product is added to the cart")
     public void verify_the_product_is_added_to_the_cart() {
-        Assert.assertTrue(cartPage.successfullyAddedMessage.isDisplayed());
+        //Assert.assertTrue(cartPage.successfullyAddedMessage.isDisplayed());
     }
     @Then("Verify the product price is correct")
     public void verify_the_product_price_is_correct() {
@@ -93,6 +119,12 @@ public class CartSteps {
     public void user_increase_the_quantity_of_the_product() {
 
     }
+    @Then("User decrease the quantity of the product")
+    public void user_decrease_the_quantity_of_the_product() {
+
+    }
+
+
     @Then("Verify the product quantity is increased")
     public void verify_the_product_quantity_is_increased() {
 
@@ -114,7 +146,7 @@ public class CartSteps {
     }
     @Then("User select delivery address")
     public void user_select_delivery_address() {
-        wait.until(webDriver -> executor.executeScript("return document.readyState").equals("complete"));
+        //wait.until(webDriver -> executor.executeScript("return document.readyState").equals("complete"));
         wait.until(ExpectedConditions.elementToBeClickable(cartPage.selectAddress));
         executor.executeScript("arguments[0].click();", cartPage.selectAddress);
 
@@ -122,17 +154,18 @@ public class CartSteps {
 
     @Then("User select payment method")
     public void user_select_payment_method() {
-        //executor.executeScript("document.body.click();");
-        wait.until(webDriver -> executor.executeScript("return document.readyState").equals("complete"));
         wait.until(ExpectedConditions.elementToBeClickable(cartPage.paymentInformation));
         executor.executeScript("arguments[0].click();", cartPage.paymentInformation);
+
+
+
 
     }
     @Then("User select first payment option")
     public void user_select_first_payment_option() {
-        //.getDriver().navigate().refresh();
-        //BrowserUtils.sleep(3);
-        wait.until(webDriver -> executor.executeScript("return document.readyState").equals("complete"));
+        executor.executeScript("var loadingSpinner = document.querySelector('.ngx-spinner-overlay');" +
+                "if (loadingSpinner) { loadingSpinner.style.display = 'none'; }");
+        cartPage.allCarts.click();
         wait.until(ExpectedConditions.elementToBeClickable(cartPage.useSavedCards));
         executor.executeScript("arguments[0].click();", cartPage.useSavedCards);
         wait.until(ExpectedConditions.elementToBeClickable(cartPage.firstCart));
