@@ -80,7 +80,7 @@ Feature: Login Functionality
       | in_username | E-Posta |
       | in_password | Şifrenizi girin |
 
-    @wip
+    @wip12
   Scenario: User can create an account with valid credentials
     When Go to login page
     And Click on the create an account button

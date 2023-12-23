@@ -70,4 +70,9 @@ public WebElement myCart;
     @FindBy(xpath = "(//main[@class='ng-star-inserted']//button)[2]")
     public WebElement goToMyOrdersButton;
 
+    @FindBy(xpath = "//button[.='Hayır']")
+    public WebElement noButton;
+
+    @FindBy(xpath = "(//div[@class='changed-bg-element basketProduct hoveredElement']//li)[2]//div[@class='basket-price']")
+    public WebElement basketLastProductPrice;
 }

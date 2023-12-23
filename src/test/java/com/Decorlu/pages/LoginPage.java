@@ -110,8 +110,15 @@ public class LoginPage extends BasePage {
         wait.until(ExpectedConditions.elementToBeClickable(girisYapKayitOlButton));
         executor.executeScript("arguments[0].click();",girisYapKayitOlButton);
         BrowserUtils.sleep(5);
+
+
+        executor.executeScript("var loadingSpinner = document.querySelector('.ngx-spinner-overlay');" +
+                "if (loadingSpinner) { loadingSpinner.style.display = 'none'; }");
         wait.until(ExpectedConditions.elementToBeClickable(girisYapButton));
         executor.executeScript("arguments[0].click();",girisYapButton);
+
+        executor.executeScript("var loadingSpinner = document.querySelector('.ngx-spinner-overlay');" +
+                "if (loadingSpinner) { loadingSpinner.style.display = 'none'; }");
 
 
         emailBox.sendKeys(ConfigurationReader.getProperty("username"));
@@ -123,6 +130,7 @@ public class LoginPage extends BasePage {
 
 
         executor.executeScript("arguments[0].click();",loginButton);
+
         wait.until(ExpectedConditions.elementToBeClickable(loginSuccessMessageCloseButton));
 
         Assert.assertTrue(loginSuccessMessage.getText().contains("Başarılı bir şekilde giriş yaptınız."));
