@@ -43,7 +43,7 @@ public class Hooks {
     public void setupForDatabaseScenarios() {
 
         //System.out.println("===this will only apply to scenarios with @db tag");
-        Driver.closeDriver();
+        //Driver.closeDriver();
 
     }
 
