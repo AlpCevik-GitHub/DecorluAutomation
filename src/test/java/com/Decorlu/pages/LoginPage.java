@@ -3,6 +3,7 @@ package com.Decorlu.pages;
 import com.Decorlu.utilities.BrowserUtils;
 import com.Decorlu.utilities.ConfigurationReader;
 import com.Decorlu.utilities.Driver;
+import io.cucumber.java.en.When;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -110,32 +111,20 @@ public class LoginPage extends BasePage {
         wait.until(ExpectedConditions.elementToBeClickable(girisYapKayitOlButton));
         executor.executeScript("arguments[0].click();",girisYapKayitOlButton);
         BrowserUtils.sleep(5);
-
-
-        executor.executeScript("var loadingSpinner = document.querySelector('.ngx-spinner-overlay');" +
-                "if (loadingSpinner) { loadingSpinner.style.display = 'none'; }");
         wait.until(ExpectedConditions.elementToBeClickable(girisYapButton));
         executor.executeScript("arguments[0].click();",girisYapButton);
-
-        executor.executeScript("var loadingSpinner = document.querySelector('.ngx-spinner-overlay');" +
-                "if (loadingSpinner) { loadingSpinner.style.display = 'none'; }");
-
-
         emailBox.sendKeys(ConfigurationReader.getProperty("username"));
-
         passwordBox.sendKeys(ConfigurationReader.getProperty("password"));
-
-
         wait.until(ExpectedConditions.elementToBeClickable(loginButton));
 
 
         executor.executeScript("arguments[0].click();",loginButton);
-
         wait.until(ExpectedConditions.elementToBeClickable(loginSuccessMessageCloseButton));
 
         Assert.assertTrue(loginSuccessMessage.getText().contains("Başarılı bir şekilde giriş yaptınız."));
         System.out.println(loginSuccessMessage.getText());
-        executor.executeScript("arguments[0].click();", loginSuccessMessageCloseButton);
+        executor.executeScript("arguments[0].click();",loginSuccessMessageCloseButton);
+
 
     }
 

@@ -46,6 +46,21 @@ Feature: User can buy any item from the store
     Then Verify that order is completed successfully
     And User click continueShoppingButton button
     Then Verify that user is on the main page
+    @wip123
+  Scenario: User go to the cart and complete the order
+    Given I am logged in as a user
+    When User go to the cart
+    And User confirm the cart
+    And User select delivery address
+    And User select payment method
+    And User enter card information
+    Then Verify that total amount equals order summary amount
+    And User select terms of conditions
+    And User click make the payment button
+    And User enter sms code "283126" and click submit button
+    Then Verify that order is completed successfully
+    And User click continueShoppingButton button
+    Then Verify that user is on the main page
 
   Scenario: User controls order completion
     Given User is logged in
