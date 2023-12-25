@@ -73,6 +73,20 @@ public WebElement myCart;
     @FindBy(xpath = "//button[.='Hayır']")
     public WebElement noButton;
 
-    @FindBy(xpath = "(//div[@class='changed-bg-element basketProduct hoveredElement']//li)[2]//div[@class='basket-price']")
-    public WebElement basketLastProductPrice;
+    @FindBy(xpath = "//div[@id='payment']/form/div/div/div/div[2]/div/div/input")
+    public WebElement cardSahibininAdi;
+    @FindBy(xpath = "//div[@id='payment']/form/div/div/div/div[3]/input")
+    public WebElement cardNumber;
+    @FindBy(xpath = "//div[@id='payment']/form/div/div/div/div[4]/div/div/div/select")
+    public WebElement expiredDateMonth;
+    @FindBy(xpath = "//div[@id='payment']/form/div/div/div/div[4]/div/div/div/select//option[.=' Ocak ']")
+    public WebElement expiredDateMonthFirstOption;
+    @FindBy(xpath = "//div[@id='payment']/form/div/div/div/div[4]/div/div/div[2]/select")
+    public WebElement year;
+    @FindBy(xpath = "//div[@id='payment']/form/div/div/div/div[4]/div/div/div[2]/select//option[.=' 30 ']")
+    public WebElement yearlastOption;
+    @FindBy(xpath = "//div[@id='payment']/form/div/div/div/div[4]/div[2]/input")
+    public WebElement cvv;
+
+
 }

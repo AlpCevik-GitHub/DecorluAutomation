@@ -3,6 +3,7 @@ package com.Decorlu.step_definitions;
 import com.Decorlu.pages.CartPage;
 import com.Decorlu.pages.LoginPage;
 import com.Decorlu.utilities.BrowserUtils;
+import com.Decorlu.utilities.ConfigurationReader;
 import com.Decorlu.utilities.Driver;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -37,7 +38,7 @@ public class CartSteps {
         waitFluent.until((ExpectedCondition<Boolean>) webDriver ->
                 executor.executeScript("return document.readyState").equals("complete"));
         wait.until(ExpectedConditions.visibilityOf(cartPage.myCart));
-        BrowserUtils.sleep(5);
+        BrowserUtils.sleep(3);
     }
 
 
@@ -87,10 +88,12 @@ public class CartSteps {
     }
     @When("User go to the cart")
     public void user_go_to_the_cart() {
-        Actions actions = new Actions(Driver.getDriver());
+        //Actions actions = new Actions(Driver.getDriver());
         wait.until(ExpectedConditions.elementToBeClickable(cartPage.myCart));
-        actions.clickAndHold(cartPage.myCart).perform();
-        actions.moveToElement(cartPage.goToBasketButton).click().perform();
+       // actions.clickAndHold(cartPage.myCart).perform();
+        executor.executeScript("arguments[0].click();", cartPage.myCart);
+        executor.executeScript("arguments[0].click();", cartPage.goToBasketButton);
+        //actions.moveToElement(cartPage.goToBasketButton).click().perform();
         BrowserUtils.sleep(2);
        WebElement element = Driver.getDriver().findElement(By.xpath(("/html/body")));
         element.click();
@@ -140,6 +143,8 @@ public class CartSteps {
     @Then("User confirm the cart")
     public void user_confirm_the_cart() {
         wait.until(webDriver -> executor.executeScript("return document.readyState").equals("complete"));
+        WebElement element = Driver.getDriver().findElement(By.xpath(("/html/body")));
+        element.click();
         wait.until(ExpectedConditions.elementToBeClickable(cartPage.confirmCartButton));
         executor.executeScript("arguments[0].click();", cartPage.confirmCartButton);
 
@@ -202,6 +207,8 @@ public class CartSteps {
     @Then("User enter sms code {string} and click submit button")
     public void user_enter_sms_code_and_click_submit_button(String string) {
         wait.until(webDriver -> executor.executeScript("return document.readyState").equals("complete"));
+        executor.executeScript("var loadingSpinner = document.querySelector('.ngx-spinner-overlay');" +
+                "if (loadingSpinner) { loadingSpinner.style.display = 'none'; }");
         Driver.getDriver().switchTo().frame(cartPage.iframe);
         cartPage.smsCode.sendKeys(string);
         //executor.executeScript("arguments[0].click();", cartPage.submitButton);
@@ -222,4 +229,31 @@ public class CartSteps {
         //Assert.assertEquals(Driver.getDriver().getTitle(),"Decorlu – Türkiye'nin Online Pazaryeri Alışveriş Platformu - Decorlu");
 
     }
-}
+    @Then("User enter card information")
+    public void user_enter_card_information(){
+        BrowserUtils.sleep(3);
+        executor.executeScript("var loadingSpinner = document.querySelector('.ngx-spinner-overlay');" +
+                "if (loadingSpinner) { loadingSpinner.style.display = 'none'; }");
+
+
+                cartPage.cardSahibininAdi.sendKeys("Test");
+                cartPage.cardNumber.sendKeys(ConfigurationReader.getProperty("cardNo"));
+                Select select = new Select(cartPage.expiredDateMonth);
+                select.selectByIndex(1);
+                Select select1 = new Select(cartPage.year);
+                select1.selectByIndex(9);
+
+//                executor.executeScript("arguments[0].click();", cartPage.expiredDateMonth);
+//                wait.until(ExpectedConditions.elementToBeClickable(cartPage.expiredDateMonthFirstOption));
+//                executor.executeScript("arguments[0].click();", cartPage.expiredDateMonthFirstOption);
+//                executor.executeScript("arguments[0].click();", cartPage.year);
+//                wait.until(ExpectedConditions.elementToBeClickable(cartPage.yearlastOption));
+//                executor.executeScript("arguments[0].click();", cartPage.yearlastOption);
+                cartPage.cvv.sendKeys("019");
+
+
+
+
+        }
+    }
+

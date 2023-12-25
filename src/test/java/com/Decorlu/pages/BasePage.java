@@ -17,7 +17,8 @@ public abstract class BasePage {
         PageFactory.initElements(Driver.getDriver(), this);
     }
 
-
+    @FindBy(xpath = "//div[contains(@class,'ngx-toastr toast-warning')]/div")
+    public WebElement toastWarningMessage;
     @FindBy(xpath = "//div[@id='navbar']//ul//following-sibling::li[5]")
     public WebElement homeLife;
     @FindBy(xpath = "//div[@id='navbar']//ul//following-sibling::li[6]")
