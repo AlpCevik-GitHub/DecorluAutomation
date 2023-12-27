@@ -80,4 +80,16 @@ Feature: User can buy any item from the store
     And User click the order
     Then Verify that order details are correct
 
+   Scenario: User should see how much more to add for free shipping
+
+      // In this scenario, free shipping limit was dynamically set to 150 from the administrator.
+
+      Given user login successfully.
+      When user goes handmade category
+      And User types 149 into max price field and clicks filter button
+      And User clicks first product from the list and goes product page
+      And user adds product to cart
+      And user goes cart page
+      Then Verify that User see how much more to add for free shipping
+
 
