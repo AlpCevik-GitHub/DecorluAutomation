@@ -1,4 +1,4 @@
-Feature: User can buy any item from the store
+luFeature: User can buy any item from the store
 
   Background: User is logged in
 
@@ -90,6 +90,6 @@ Feature: User can buy any item from the store
       And User clicks first product from the list and goes product page
       And user adds product to cart
       And user goes cart page
-      Then Verify that User see how much more to add for free shipping
+      Then Verify that User see how much more to add for free shipping correctly
 
 
