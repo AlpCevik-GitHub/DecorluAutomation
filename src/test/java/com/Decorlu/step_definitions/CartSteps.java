@@ -32,8 +32,8 @@ public class CartSteps {
     // JavaScript executor ile document.readyState'yi kontrol et
 
 
-    @Given("I am logged in as a user")
-    public void i_am_logged_in_as_a_user() {
+    @Given("user login successfully")
+    public void user_login_successfully() {
         loginPage.login();
         waitFluent.until((ExpectedCondition<Boolean>) webDriver ->
                 executor.executeScript("return document.readyState").equals("complete"));
@@ -42,16 +42,16 @@ public class CartSteps {
     }
 
 
-    @Given("User select {string} category")
-    public void user_select_category(String string) {
+    @Given("User select {string} from the main menu")
+    public void User_select_from_the_main_menu(String string) {
 
            Actions actions = new Actions(Driver.getDriver());
             actions.clickAndHold(cartPage.furniture).perform();
             actions.moveToElement(cartPage.bahceMobilyalari).click().perform();
        // }
     }
-    @When("User select {string} subcategory")
-    public void user_select_subcategory(String string) {
+    @When("User select {string} from the category page")
+    public void user_select_from_the_category_page(String string) {
         //Driver.getDriver().navigate().refresh();
         //wait.until(ExpectedConditions.elementToBeClickable(cartPage.firstProduct));
         //executor.executeScript("arguments[0].click();", cartPage.firstProduct);
