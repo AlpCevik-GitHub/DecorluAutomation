@@ -30,7 +30,7 @@ public class LoginSteps {
     public void go_to_login_page() {
         wait.until(ExpectedConditions.elementToBeClickable(loginPage.girisYapKayitOlButton));
         executor.executeScript("arguments[0].click();",loginPage.girisYapKayitOlButton);
-        BrowserUtils.sleep(5);
+       // BrowserUtils.sleep(4);
         wait.until(ExpectedConditions.elementToBeClickable(loginPage.girisYapButton));
         executor.executeScript("arguments[0].click();",loginPage.girisYapButton);
 
