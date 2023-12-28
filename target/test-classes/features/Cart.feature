@@ -5,9 +5,9 @@ Feature: User can buy any item from the store
 
   @1234
   Scenario: User buys an item
-    Given I am logged in as a user
-    Given User select "Mobilya" category
-    When User select "Bahçe Mobilyaları" subcategory
+    Given user login successfully
+    Given User select "Category" from the main menu
+    When User select "subcategory" from the category page
     And User select Marka
     And User select Fiyat Aralığı
     And User select first product on the search result
@@ -33,7 +33,7 @@ Feature: User can buy any item from the store
     Then Verify the product is deleted from the cart
   @1234 @12345
   Scenario: User go to the cart and complete the order
-    Given I am logged in as a user
+    Given user login successfully
     When User go to the cart
     And User confirm the cart
     And User select delivery address
@@ -48,7 +48,7 @@ Feature: User can buy any item from the store
     Then Verify that user is on the main page
     @wip123
   Scenario: User go to the cart and complete the order
-    Given I am logged in as a user
+    Given user login successfully
     When User go to the cart
     And User confirm the cart
     And User select delivery address
@@ -80,4 +80,21 @@ Feature: User can buy any item from the store
     And User click the order
     Then Verify that order details are correct
 
+   Scenario: User should see how much more to add for free shipping
 
+      // In this scenario, free shipping limit was dynamically set to 150 from the administrator.
+
+      Given user login successfully
+      When User select "Category" from the main menu
+      And User select "subcategory" from the category page
+      And User types 149 into max price field and clicks filter button
+      And User clicks first product from the list and goes product page
+      And user adds product to cart
+      And user goes cart page
+      Then Verify that User see how much more to add for free shipping
+@list
+Scenario: Test
+
+  Given user login successfully
+  When User click yapı market button
+  And User click bahce button
