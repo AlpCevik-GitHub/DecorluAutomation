@@ -57,6 +57,7 @@ public abstract class Sepet {
     public List<WebElement> sepetPageDelete;
     @FindBy(xpath = "//table[@class='table']//tr//img")
     public List<WebElement> sepetPageProductImage;
+
     public abstract String getName(int index);
     public abstract String getBrand(int index);
     public abstract  String getQuantity(int index);
