@@ -1,6 +1,76 @@
+# sepet test
 Feature: User can buy any item from the store
 
   Background: User is logged in
+
+  Scenario: Sepete ürün ekleme
+      Given user login olur
+      When user ana menüden "Kategori" seçer
+      And user kategori sayfasından "Alt Kategori" seçer
+      And user ilk ürünü seçer
+      And user ürünü sepete ekle butonuna tıklar
+      Then verify that ürün header sepete eklendi
+      Then verify that ürün fiyatı doğru
+      Then verify that ürün adedi doğru
+      Then verify that ürün toplam fiyatı doğru
+
+Scenario: Sepete ürün ekleme
+      Given user login olur
+        When user ana menüden "Kategori" seçer
+        And user kategori sayfasından "Alt Kategori" seçer
+        And user ilk ürünü seçer
+        And user ürünü sepete ekle butonuna iki defa tıklar
+        Then verify that ürün header sepete eklendi
+        Then verify that ürün fiyatı doğru
+        Then verify that ürün adedi doğru
+        Then verify that ürün toplam fiyatı doğru
+
+  Scenario: Sepete ürün ekleme
+    Given user login olur
+    When user ana menüden "Kategori" seçer
+    And user kategori sayfasından "Alt Kategori" seçer
+    And user ilk ürünü seçer
+    And user ürünü sepete ekle butonuna tıklar
+    Then verify that ürün sepetpage sepete eklendi
+    Then verify that ürün fiyatı doğru
+    Then verify that ürün adedi doğru
+    Then verify that ürün toplam fiyatı doğru
+
+  Scenario: Sepete ürün ekleme
+    Given user login olur
+    When user ana menüden "Kategori" seçer
+    And user kategori sayfasından "Alt Kategori" seçer
+    And user ilk ürünü seçer
+    And user ürünü sepete ekle butonuna iki defa tıklar
+    Then verify that ürün sepetpage sepete eklendi
+    Then verify that ürün fiyatı doğru
+    Then verify that ürün adedi doğru
+    Then verify that ürün toplam fiyatı doğru
+
+  Scenario: Sepete ürün ekleme
+    Given user login olur
+    When user ana menüden "Kategori" seçer
+    And user kategori sayfasından "Alt Kategori" seçer
+    And user ilk ürünü seçer
+    And user ürünü sepete ekle butonuna tıklar
+    Then verify that ürün sipariş özeti sepete eklendi
+    Then verify that ürün fiyatı doğru
+    Then verify that ürün adedi doğru
+    Then verify that ürün toplam fiyatı doğru
+
+  Scenario: Sepete ürün ekleme
+    Given user login olur
+    When user ana menüden "Kategori" seçer
+    And user kategori sayfasından "Alt Kategori" seçer
+    And user ilk ürünü seçer
+    And user ürünü sepete ekle butonuna iki defa tıklar
+    Then verify that ürün sipariş özeti sepete eklendi
+    Then verify that ürün fiyatı doğru
+    Then verify that ürün adedi doğru
+    Then verify that ürün toplam fiyatı doğru
+
+
+
 
 
   @1234
@@ -99,4 +169,10 @@ Scenario: Test
   When User click yapı market button
   And User click bahce button
 
+#  orders
 
+
+
+
+
+# others

@@ -5,10 +5,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class SepetOzeti extends  Sepet {
+public class SiparisOzeti extends  Sepet {
 
 
-    public  SepetOzeti() {
+    public SiparisOzeti() {
 
         PageFactory.initElements(Driver.getDriver(), this);
 
