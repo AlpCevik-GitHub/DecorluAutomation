@@ -1,7 +1,9 @@
 package com.Decorlu.step_definitions;
 
 import com.Decorlu.pages.CartPage;
+import com.Decorlu.pages.CategoryProducts;
 import com.Decorlu.pages.LoginPage;
+import com.Decorlu.pages.Sepet;
 import com.Decorlu.utilities.BrowserUtils;
 import com.Decorlu.utilities.ConfigurationReader;
 import com.Decorlu.utilities.Driver;
@@ -147,6 +149,7 @@ public class CartSteps {
         element.click();
         wait.until(ExpectedConditions.elementToBeClickable(cartPage.confirmCartButton));
         executor.executeScript("arguments[0].click();", cartPage.confirmCartButton);
+
 
     }
     @Then("User select delivery address")
