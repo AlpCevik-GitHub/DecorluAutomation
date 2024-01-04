@@ -3,7 +3,7 @@ package com.Decorlu.step_definitions;
 import com.Decorlu.pages.CartPage;
 import com.Decorlu.pages.CategoryProducts;
 import com.Decorlu.pages.LoginPage;
-import com.Decorlu.pages.Sepet;
+import com.Decorlu.pages.SepetDropDown;
 import com.Decorlu.utilities.BrowserUtils;
 import com.Decorlu.utilities.ConfigurationReader;
 import com.Decorlu.utilities.Driver;
@@ -13,11 +13,10 @@ import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.*;
 
-import javax.swing.*;
 import java.time.Duration;
+import java.util.List;
 
 public class CartSteps {
 
@@ -30,10 +29,99 @@ public class CartSteps {
             .withTimeout(Duration.ofSeconds(30))
             .pollingEvery(Duration.ofSeconds(1))
             .ignoring(Exception.class);
+    Actions actions = new Actions(Driver.getDriver());
+    CategoryProducts categoryProducts = new CategoryProducts();
+    SepetDropDown sepetDropDown = new SepetDropDown();
+
 
     // JavaScript executor ile document.readyState'yi kontrol et
 
+    @Given("user login olur")
+    public void user_login_olur() {
+        loginPage.login();
+        waitFluent.until((ExpectedCondition<Boolean>) webDriver ->
+                executor.executeScript("return document.readyState").equals("complete"));
+        wait.until(ExpectedConditions.visibilityOf(cartPage.myCart));
+        BrowserUtils.sleep(3);
+    }
+    @When("user ana menüden {string} seçer")
+    public void user_ana_menüden_seçer(String string) {
 
+        actions.clickAndHold(cartPage.furniture).perform();
+    }
+    @When("user kategori sayfasından {string} seçer")
+    public void user_kategori_sayfasından_seçer(String string) {
+        actions.moveToElement(cartPage.bahceMobilyalari).click().perform();
+    }
+    @When("user ilk ürünü seçer")
+    public void user_ilk_ürünü_seçer() {
+
+        for(List<WebElement> temp = categoryProducts.productsCategoryPage; temp.size() < Integer.parseInt(categoryProducts.toplamUrunSayisi.getText()); temp = categoryProducts.productsCategoryPage) {
+            executor.executeScript("window.scrollTo({ top: document.body.scrollHeight, behavior: 'instant' })", new Object[0]);
+        }
+
+        System.out.println(((WebElement) categoryProducts.productsCategoryPage.get(0)).getText());
+        System.out.println(((WebElement) categoryProducts.productsCategoryPage.get(0)).getText());
+        System.out.println(categoryProducts.productsCategoryPage.size());
+
+        categoryProducts.name = categoryProducts.getName(0);
+        categoryProducts.price = categoryProducts.getPrice(0);
+        categoryProducts.brand = categoryProducts.getBrand(0);
+        categoryProducts.quantity = categoryProducts.getQuantity(0);
+
+        wait.until(ExpectedConditions.elementToBeClickable(cartPage.firstProductInCategoryBahceMobilyalari));
+        executor.executeScript("arguments[0].click();", cartPage.firstProductInCategoryBahceMobilyalari);
+    }
+    @When("user ürünü sepete ekle butonuna tıklar")
+    public void user_ürünü_sepete_ekle_butonuna_tıklar() {
+        executor.executeScript("var loadingSpinner = document.querySelector('.ngx-spinner-overlay');" +
+                "if (loadingSpinner) { loadingSpinner.style.display = 'none'; }");
+        wait.until(ExpectedConditions.elementToBeClickable(cartPage.addToCartButton));
+        executor.executeScript("arguments[0].click();", cartPage.addToCartButton);
+        wait.until(ExpectedConditions.elementToBeClickable(cartPage.successfullyAddedMessageCloseButton));
+        Assert.assertTrue(cartPage.successfullyAddedMessage.getText().contains("Sepete başarılı bir şekilde eklediniz."));
+        System.out.println(cartPage.successfullyAddedMessage.getText());
+        executor.executeScript("arguments[0].click();", cartPage.successfullyAddedMessageCloseButton);
+    }
+    @Then("verify that ürün header sepete eklendi")
+    public void verify_that_ürün_header_sepete_eklendi() {
+
+
+
+
+        executor.executeScript("var loadingSpinner = document.querySelector('.ngx-spinner-overlay');" +
+                "if (loadingSpinner) { loadingSpinner.style.display = 'none'; }");
+        cartPage.myCart.click();
+
+        for (int i = 0; i < sepetDropDown.sepetDropDownProductlist.size(); i++) {
+
+
+            if(sepetDropDown.getName(i).contains(categoryProducts.name)){
+                sepetDropDown.name = sepetDropDown.getName(i);
+                sepetDropDown.price = sepetDropDown.getPrice(i);
+                sepetDropDown.brand = sepetDropDown.getBrand(i);
+                sepetDropDown.quantity = sepetDropDown.getQuantity(i);
+            }
+        }
+        Assert.assertEquals(categoryProducts.name,sepetDropDown.name);
+//        CategoryProducts firstProduct = new CategoryProducts();
+//        System.out.println("((Category) firstProduct).getName(0) = " + firstProduct.getName(1));
+//        System.out.println("((Category) firstProduct).getBrand(0) = " + firstProduct.getBrand(1));
+//        System.out.println("((Category) firstProduct).getPrice(0) = " + firstProduct.getPrice(1));
+    }
+    @Then("verify that ürün fiyatı doğru")
+    public void verify_that_ürün_fiyatı_doğru() {
+        System.out.println("categoryProducts.price = " + categoryProducts.price);
+        System.out.println("sepetDropDown.price = " + sepetDropDown.price);
+    }
+    @Then("verify that ürün adedi doğru")
+    public void verify_that_ürün_adedi_doğru() {
+
+    }
+    @Then("verify that ürün toplam fiyatı doğru")
+    public void verify_that_ürün_toplam_fiyatı_doğru() {
+
+    }
     @Given("user login successfully")
     public void user_login_successfully() {
         loginPage.login();

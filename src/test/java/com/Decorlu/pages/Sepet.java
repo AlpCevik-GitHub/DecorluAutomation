@@ -1,7 +1,6 @@
 package com.Decorlu.pages;
 
 import com.Decorlu.utilities.Driver;
-import io.cucumber.java.eo.Do;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -30,7 +29,7 @@ public abstract class Sepet {
     )
     public WebElement bahceMobilyalari;
     @FindBy( xpath = "//div[@class='imageCategory']/div/div")
-    public  List<WebElement> productsSepet;
+    public  List<WebElement> productsCategoryPage;
     @FindBy(
             xpath = "//strong[@class='color-warning']"
     )
@@ -45,8 +44,7 @@ public abstract class Sepet {
 
     @FindBy(xpath = "//div[@class='priceAll']//div//strong")
     public WebElement selectedProductPrice;
-    @FindBy(xpath = "//section[@class='p-1']//li")
-    public List<WebElement> sepetDropDownProductlist;
+
     @FindBy(xpath = "//table[@class='table']//tr")
     public List<WebElement> sepetPageProductList;
     @FindBy(xpath = "//table[@class='table']//tr//button[@class='button asc btn-sm']")

@@ -18,7 +18,7 @@ import org.junit.runner.RunWith;
         glue = "com/Decorlu/step_definitions",
         dryRun = false,
         stepNotifications = true,
-        tags = "@wip123",
+        tags = "@wip",
         publish=true
 )
 

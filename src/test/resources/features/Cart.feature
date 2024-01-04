@@ -2,7 +2,7 @@
 Feature: User can buy any item from the store
 
   Background: User is logged in
-
+@wip
   Scenario: Sepete ürün ekleme
       Given user login olur
       When user ana menüden "Kategori" seçer
@@ -73,7 +73,7 @@ Scenario: Sepete ürün ekleme
 
 
 
-  @1234
+
   Scenario: User buys an item
     Given user login successfully
     Given User select "Category" from the main menu
@@ -83,25 +83,25 @@ Scenario: Sepete ürün ekleme
     And User select first product on the search result
     And User add the product to the cart
 
-  @1234
+
   Scenario: User go to the cart and verify the product
     And User go to the cart
     Then Verify the product is added to the cart
     Then Verify the product price is correct
     Then Verify the product quantity is correct
     Then Verify the product total price is correct
-  @1234
+
   Scenario: User go to the cart and increase/decrease the quantity of the product
     When User go to the cart
     And User increase the quantity of the product
     And User decrease the quantity of the product
     Then Verify the product quantity is increased
-  @1234
+
   Scenario: User go to the cart and delete the product
     When User go to the cart
     And User delete the product from the cart
     Then Verify the product is deleted from the cart
-  @1234 @12345
+
   Scenario: User go to the cart and complete the order
     Given user login successfully
     When User go to the cart
@@ -116,7 +116,7 @@ Scenario: Sepete ürün ekleme
     Then Verify that order is completed successfully
     And User click continueShoppingButton button
     Then Verify that user is on the main page
-    @wip123
+
   Scenario: User go to the cart and complete the order
     Given user login successfully
     When User go to the cart

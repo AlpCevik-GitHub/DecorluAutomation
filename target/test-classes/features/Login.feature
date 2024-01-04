@@ -5,7 +5,7 @@ Feature: Login Functionality
 
 
 
-@wip
+
   Scenario: Login with valid credentials by clicking login button
     When Go to login page
     And Enter valid username in username field
@@ -13,7 +13,7 @@ Feature: Login Functionality
     And Click on the login button
     Then Verify that user can login
 
-@wip
+
   Scenario: Login with valid credentials  by hitting  "Enter" key from the keyboard
     When Go to login page
     And Enter valid username in username field and password in password field
@@ -22,7 +22,7 @@ Feature: Login Functionality
     And hit enter key word
     Then Verify that user can login
 
-@wip1
+
   Scenario Outline: user can not login with invalid credentials
     When Go to login page
     And Enter referred credentials "<username>" "<password>"
@@ -35,7 +35,7 @@ Feature: Login Functionality
       | Employee130@abc.com |Alpaçino.1|
       | alpacino.1@gmail.com| asde123|
 
-   @wip
+
   Scenario: user can not login with blank credentials
     When Go to login page
     And User enter credentials "Employee130" "Alpaçino.1"
@@ -80,7 +80,7 @@ Feature: Login Functionality
       | in_username | E-Posta |
       | in_password | Şifrenizi girin |
 
-    @wip12
+
   Scenario: User can create an account with valid credentials
     When Go to login page
     And Click on the create an account button
